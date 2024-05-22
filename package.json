@@ -1,0 +1,22 @@
+{
+  "name": "newman-api-tests",
+  "version": "1.0.0",
+  "description": "Project to run and test REST API using Newman",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run ApiCollections/MWS-API-Tests.postman_collection.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdougans/Newman-API-Tests.git"
+  },
+  "author": "Stuart Dougans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdougans/Newman-API-Tests/issues"
+  },
+  "homepage": "https://github.com/sdougans/Newman-API-Tests#readme",
+  "devDependencies": {
+    "newman": "^6.1.2"
+  }
+}
