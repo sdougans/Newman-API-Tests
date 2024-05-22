@@ -17,7 +17,7 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    newman run ApiCollections/MWS-API-Tests.postman_collection.json --env-var baseUri="${{baseUri}}"
+    newman run ApiCollections/MWS-API-Tests.postman_collection.json --env-var baseUri="${{ parameters.baseUri }}"
   displayName: 'Run tests'
   env:
     CI: 'true'
