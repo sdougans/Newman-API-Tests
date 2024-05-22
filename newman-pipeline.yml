@@ -1,10 +1,13 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
 parameters:
 - name: baseUri
   type: string
   default: "https://app-p-mwsbackendpub-e15a9d34.azurewebsites.net"
-
-pool:
-  vmImage: ubuntu-latest
 
 steps:
 - task: NodeTool@0
