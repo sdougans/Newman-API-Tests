@@ -4,7 +4,7 @@
   "description": "Project to run and test REST API using Newman",
   "main": "index.js",
   "scripts": {
-    "test": "newman run ApiCollections/MWS-API-Tests.postman_collection.json"
+    "test": "newman run ApiCollections/MWS-API-Tests.postman_collection.json --reporters cli,junit --reporter-junit-export ./TestResults/testResults.xml"
   },
   "repository": {
     "type": "git",

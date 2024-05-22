@@ -20,7 +20,16 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    newman run ApiCollections/MWS-API-Tests.postman_collection.json --env-var baseUri="${{ parameters.baseUri }}"
+    newman run ApiCollections/MWS-API-Tests.postman_collection.json \
+      --env-var baseUri="${{ parameters.baseUri }}" \
+      --reporters cli,junit \
+      --reporter-junit-export $(Build.SourcesDirectory)/TestResults/testResults.xml
   displayName: 'Run tests'
   env:
     CI: 'true'
+
+
+- task: PublishTestResults@2
+  displayName: 'Publish API test results'
+  inputs:
+    testResultsFiles: '$(Build.SourcesDirectory)/TestResults/*.xml'
