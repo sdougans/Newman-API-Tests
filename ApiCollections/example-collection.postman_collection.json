@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "ae5ff9ba-13ac-4d42-a7d6-825d7f8c4344",
+		"name": "example-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3812186"
+	},
+	"item": [
+		{
+			"name": "example-request-1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate the response schema for required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.args).to.exist;\r",
+							"    pm.expect(responseData.headers).to.exist;\r",
+							"    pm.expect(responseData.url).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify the presence of expected fields in headers\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.headers).to.be.an('object');\r",
+							"    pm.expect(responseData.headers).to.include.all.keys(\r",
+							"        'host', 'x-forwarded-proto', 'x-request-start', 'connection',\r",
+							"        'x-forwarded-port', 'x-amzn-trace-id', 'user-agent', 'accept',\r",
+							"        'cache-control', 'postman-token', 'accept-encoding'\r",
+							"    );\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Args field should be an empty object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.args).to.eql({});\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/get",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "example-request-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Abilities array should have non-empty name and url fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.abilities).to.be.an('array');\r",
+							"    responseData.abilities.forEach(function (ability) {\r",
+							"        pm.expect(ability.ability.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");\r",
+							"        pm.expect(ability.ability.url).to.be.a('string').and.to.have.lengthOf.at.least(1, \"URL should not be empty\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Game indices array should have non-empty game_index and version fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.game_indices).to.be.an('array').that.is.not.empty;\r",
+							"    responseData.game_indices.forEach(function (index) {\r",
+							"        pm.expect(index.game_index).to.be.a('number').that.is.above(0);\r",
+							"        pm.expect(index.version).to.be.an('object').that.is.not.empty;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Moves array should have non-empty move and version_group_details fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.moves).to.be.an('array').and.to.not.be.empty;\r",
+							"\r",
+							"    responseData.moves.forEach(function (move) {\r",
+							"        pm.expect(move.move.name).to.be.a('string').and.to.not.be.empty;\r",
+							"\r",
+							"        pm.expect(move.version_group_details).to.be.an('array').and.to.not.be.empty;\r",
+							"        move.version_group_details.forEach(function (detail) {\r",
+							"            pm.expect(detail.level_learned_at).to.be.a('number');\r",
+							"            pm.expect(detail.move_learn_method.name).to.be.a('string').and.to.not.be.empty;\r",
+							"            pm.expect(detail.version_group.name).to.be.a('string').and.to.not.be.empty;\r",
+							"            pm.expect(detail.version_group.url).to.be.a('string').and.to.not.be.empty;\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/charmander/",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						"charmander",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUri",
+			"value": "postman-echo.com",
+			"type": "string"
+		}
+	]
+}
